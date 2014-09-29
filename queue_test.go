@@ -105,8 +105,8 @@ var _ = Describe("Queue", func() {
 	Describe("Thread Safety", func() {
 		Context("Push is thread safe with two or more goroutines", func() {
 			q := queue.New()
-			for _, i := range []int{1, 2, 3, 4, 5, 6} {
-				go func(q *queue.Queue) { q.Push(i) }(q)
+			for i := 0; i < 6; i++ {
+				go func(q *queue.Queue) { q.Push(1) }(q)
 			}
 			It("Should be a queue of six element", func() {
 				Expect(q.Len()).To(Equal(int64(6)))
@@ -116,7 +116,7 @@ var _ = Describe("Queue", func() {
 		Context("Calling push and pop in goroutines is safe", func() {
 			q := queue.New()
 			for i := 1; i < 6001; i++ {
-				go func(q *queue.Queue) { q.Push(i) }(q)
+				go func(q *queue.Queue) { q.Push(1) }(q)
 			}
 
 			for i := 0; i < 3000; i++ {
@@ -131,7 +131,7 @@ var _ = Describe("Queue", func() {
 
 	Describe("Values returns the whole Queue values", func() {
 		q := queue.New()
-		for _, i := range []int{1, 2, 3, 4, 5} {
+		for i := 1; i < 6; i++ {
 			q.Push(i * i)
 		}
 		It("Shouldn't mute the Queue", func() {
