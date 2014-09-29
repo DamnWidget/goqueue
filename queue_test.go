@@ -115,16 +115,16 @@ var _ = Describe("Queue", func() {
 
 		Context("Calling push and pop in goroutines is safe", func() {
 			q := queue.New()
-			for i := 1; i < 6001; i++ {
+			for i := 1; i < 601; i++ {
 				go func(q *queue.Queue) { q.Push(1) }(q)
 			}
 
-			for i := 0; i < 3000; i++ {
+			for i := 0; i < 300; i++ {
 				go func(q *queue.Queue) { q.Pop() }(q)
 			}
 
 			It("Should be a Queue of three thousand elements", func() {
-				Expect(q.Len()).To(Equal(int64(3000)))
+				Expect(q.Len()).To(Equal(int64(300)))
 			})
 		})
 	})
@@ -138,6 +138,14 @@ var _ = Describe("Queue", func() {
 			v := q.Values()
 			Expect(v).To(Equal([]interface{}{1, 4, 9, 16, 25}))
 			Expect(q.Len()).To(Equal(int64(5)))
+		})
+
+		Context("If the Queue is empty", func() {
+			q := queue.New()
+			It("Returns just empty slice", func() {
+				v := q.Values()
+				Expect(v).To(Equal([]interface{}{}))
+			})
 		})
 	})
 
