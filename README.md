@@ -114,7 +114,7 @@ for item := range q.Values() {
 }
 ```
 
-## Thread Safe
+## Thread Safe Operations
 
-All the operations in the Queue are tread safe so we can share a Queue
+All the operations in the Queue are thread safe so we can share a Queue
 instance safely between any number of `goroutines` as we need.
