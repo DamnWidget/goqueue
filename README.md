@@ -28,7 +28,7 @@ q := goqueue.New()
 ### Sized Queues
 
 If you want to create a sized Queue, then pass the desired size of the queue as
-first and only one parameters to the `New` function (if more than one parameter
+first and only one parameter to the `New` function (if more than one parameter
 is passed, only the first one is taken into account)
 
 ```go
@@ -48,7 +48,8 @@ fmt.Println(q.Cap())
 ```
 Will output:
 
-```0
+```
+0
 1000
 ```
 
